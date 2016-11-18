@@ -11,7 +11,7 @@ public class TestMain {
 		while (true) {
 			// get tacho count
 			int tachoCount = Motor.A.getTachoCount();
-
+			// testing 
 			// show tacho count on screen
 			LCD.drawString("Tacho count: " + tachoCount, 1, 1);
 

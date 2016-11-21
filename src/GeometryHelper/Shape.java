@@ -6,11 +6,11 @@ public class Shape {
 	ArrayList<Path > paths= new ArrayList ();
 	Vector origin;
 	
-	void translateBy(Vector dv) {
+	void scaleBy(double scaleFactor) {
 		// TODO
 	}
 	
-	void scaleBy(double scaleFactor) {
+	void translateBy(Vector dv) {
 		// TODO
 	}
 }

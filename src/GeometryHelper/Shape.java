@@ -13,7 +13,4 @@ public class Shape {
 	void translateBy(Vector dv) {
 		// TODO
 	}
-	void translateBy2(Vector dv) {
-		// TODO
-	}
 }

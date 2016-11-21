@@ -9,4 +9,8 @@ public class Shape {
 	void translateBy(Vector dv) {
 		// TODO
 	}
+	
+	void scaleBy(double scaleFactor) {
+		// TODO
+	}
 }

@@ -30,6 +30,7 @@ public class Vector {
 	}
 	
 	
+	
 	// subtraction
 	
 	Vector subtract(Vector v) {
@@ -55,5 +56,9 @@ public class Vector {
 	
 	double scalarProduct(Vector v) {
 		return x * v.x + y * v.y;
+	}
+	void setXY(double x, double y) {
+		this.x = x;
+		this.y = y;
 	}
 }

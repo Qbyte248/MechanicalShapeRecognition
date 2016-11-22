@@ -3,14 +3,14 @@ package GeometryHelper;
 import java.util.ArrayList;
 
 public class Shape {
-	ArrayList<Path > paths= new ArrayList ();
-	Vector origin;
+	public ArrayList<Path > paths= new ArrayList ();
+	public Vector origin;
 	
-	void scaleBy(double scaleFactor) {
+	public void scaleBy(double scaleFactor) {
 		// TODO
 	}
 	
-	void translateBy(Vector dv) {
+	public void translateBy(Vector dv) {
 		// TODO
 	}
 }

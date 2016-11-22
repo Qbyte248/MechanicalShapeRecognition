@@ -1,5 +1,7 @@
 package Classification;
 
+import java.util.Enumeration;
+
 import GeometryHelper.Path;
 import GeometryHelper.Shape;
 import GeometryHelper.Vector;
@@ -13,14 +15,16 @@ public class ShapePotentialClassifier implements ShapeClassifier {
 	 */
 	private static double classificationValue(Shape shape1, Shape shape2) {
 		double potential = 0.0;
+		// potential of shape1 in relation to shape2
 		for (Path path1 : shape1.paths) {
 			for (Vector point1 : path1.points) {
-				potential += pointPotential(point1, shape2);
+				potential += pointPotential(shape1.origin.add(path1.origin.add(point1)), shape2);
 			}
 		}
+		// potential of shape2 in relation to shape1
 		for (Path path2 : shape2.paths) {
 			for (Vector point2 : path2.points) {
-				potential += pointPotential(point2, shape1);
+				potential += pointPotential(shape2.origin.add(path2.origin.add(point2)), shape1);
 			}
 		}
 		
@@ -75,9 +79,24 @@ public class ShapePotentialClassifier implements ShapeClassifier {
 		return 0;
 	}
 	
+	private Vector getSmallestBoxAround(Shape shape) {
+		// TODO
+		return null;
+	}
+	
 	@Override
 	public String classify(Shape shape) {
-		// TODO Auto-generated method stub
-		return null;
+		String shapeDescription = null;
+		
+		Enumeration<String> shapeDescriptions = ShapeTemplates.getShapeDescriptions();
+		for (; shapeDescriptions.hasMoreElements();) {
+		      shapeDescription = shapeDescriptions.nextElement();
+		      
+		      Shape templateShape = ShapeTemplates.get(shapeDescription);
+		      
+		      // TODO
+		}
+		
+		return shapeDescription;
 	}
 }

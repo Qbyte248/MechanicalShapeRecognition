@@ -6,7 +6,8 @@ public interface ShapeClassifier {
 	
 	/**
 	 * @param shape which will be classified
-	 * @return a String/description which best matches the shape
+	 * @return 	a String/description which best matches the shape;
+	 * 			Returns `null` if it could not classify the shape
 	 */
 	String classify(Shape shape);
 }

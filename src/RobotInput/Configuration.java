@@ -11,7 +11,8 @@ public class Configuration {
 	static Vector center =new Vector(achse/2, 0);
 	
 			
-	void setCenter(){
+	void setCenter(double x,double y){
+		center.setXY(x, y);
 		
 		
 	}

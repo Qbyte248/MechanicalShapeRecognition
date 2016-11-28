@@ -1,11 +1,14 @@
 package Classification;
 
 import java.util.Enumeration;
+import java.util.HashMap;
 
 import GeometryHelper.Path;
+import GeometryHelper.Rectangle;
 import GeometryHelper.Shape;
 import GeometryHelper.Vector;
 
+@SuppressWarnings("deprecation")
 public class ShapePotentialClassifier implements ShapeClassifier {
 	
 	/**
@@ -79,9 +82,30 @@ public class ShapePotentialClassifier implements ShapeClassifier {
 		return 0;
 	}
 	
-	private Vector getSmallestBoxAround(Shape shape) {
-		// TODO
-		return null;
+	private Rectangle getSmallestBoxAround(Shape shape) {
+		
+		Vector lowerLeft = new Vector(Double.MAX_VALUE, Double.MAX_VALUE);
+		Vector upperRight = new Vector(-Double.MAX_VALUE, -Double.MAX_VALUE);
+		
+		boolean hasPoints = false;
+		for (Path path : shape.paths) {
+			hasPoints = hasPoints || !path.points.isEmpty();
+			for (Vector point : path.points) {
+				Vector v = shape.origin.add(path.origin.add(point));
+				
+				// assign lower left and upper right
+				lowerLeft.x = Math.min(lowerLeft.x, v.x);
+				lowerLeft.y = Math.min(lowerLeft.y, v.y);
+				upperRight.x = Math.max(upperRight.x, v.x);
+				upperRight.y = Math.max(upperRight.y, v.y);
+			}
+		}
+		
+		if (!hasPoints) {
+			throw new IllegalArgumentException("Shape has no points => no smallest box");
+		}
+		
+		return new Rectangle(lowerLeft, upperRight.subtract(lowerLeft));
 	}
 	
 	@Override
@@ -94,7 +118,8 @@ public class ShapePotentialClassifier implements ShapeClassifier {
 		      
 		      Shape templateShape = ShapeTemplates.get(shapeDescription);
 		      
-		      // TODO
+		      // TODO: get smallest box; translate and scale; compare
+		      
 		}
 		
 		return shapeDescription;

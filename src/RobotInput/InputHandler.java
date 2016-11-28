@@ -10,7 +10,7 @@ import lejos.robotics.RegulatedMotor;
 
 public class InputHandler {
 	public static boolean running=true;
-	private static final boolean debugging=false;
+	private static final boolean debugging=true;
 	
 	public static Shape shape=new Shape();
 	static RegulatedMotor leftMotor = Motor.A;
@@ -123,8 +123,9 @@ public class InputHandler {
 			if((newDataPoint.x!=0&&newDataPoint.y!=0)){
 				lastDataPoint=newDataPoint;
 				addPointToPath(lastDataPoint, countPath);
-				stepForward("x:"+lastDataPoint.x+" // y "+lastDataPoint.y);
+				//stepForward("x:"+lastDataPoint.x+" // y "+lastDataPoint.y);
 				stepForward("Nx:"+newDataPoint.x+" // y "+newDataPoint.y);
+				stepForward("Ny:"+newDataPoint.y);
 				oldleftTachocount=leftTachocount;
 				oldrightTachocount=rightTachocount;
 			}

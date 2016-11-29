@@ -3,12 +3,23 @@ package GeometryHelper;
 import java.util.ArrayList;
 
 public class Shape {
-	public ArrayList<Path> paths= new ArrayList<>();
+	public ArrayList<Path> paths = new ArrayList<>();
 	public Vector origin;
 	
 	// possible optimization to set all origins to (0, 0) and add a (boolean) flag 
 	
 	private Rectangle rectangle;
+	
+	public Shape copy() {
+		Shape shapeCopy = new Shape();
+		shapeCopy.origin = this.origin.copy();
+		
+		for (Path path : this.paths) {
+			shapeCopy.paths.add(path.copy());
+		}
+		
+		return shapeCopy;
+	}
 	
 	/**
 	 * @return Smallest rectangle which contains `this`

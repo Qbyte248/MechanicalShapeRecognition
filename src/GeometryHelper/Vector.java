@@ -9,6 +9,11 @@ public class Vector {
 		this.y = y;
 	}
 	
+	
+	public Vector copy() {
+		return new Vector(x, y);
+	}
+	
 	/** Euclidian norm (||v|| == |v|^2) **/
 	public double norm() {
 		return x * x + y * y;

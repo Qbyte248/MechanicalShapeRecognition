@@ -52,7 +52,7 @@ public class Configuration {
 		radius = Math.abs(h / newangle);
 	//	InputHandler.stepForward("h." + h);
 
-		//InputHandler.stepForward("ra." + radius);
+		InputHandler.stepForward("ra." + radius);
 
 		// compute distance with the center pos
 		distance = 2 * (radius - center.x) * Math.sin(newangle);

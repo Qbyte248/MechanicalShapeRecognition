@@ -7,6 +7,21 @@ public class Path {
 	public ArrayList<Vector> points = new ArrayList<>();
 	public Vector origin;
 	
+	/**
+	 * @param separator
+	 * @return \n separated vector descriptions if separator == null
+	 */
+	public String description(String separator) {
+		if (separator == null) {
+			separator = "\n";
+		}
+		String result = "";
+		for (Vector point : points) {
+			result = result + point.description() + separator;
+		}
+		return result;
+	}
+	
 	public void addPoint(double x, double y) {
 		points.add(new Vector(x, y));
 	}

@@ -10,6 +10,20 @@ public class Shape {
 	
 	private Rectangle rectangle;
 	
+	/**
+	 * @param separator for vector descriptions
+	 * @return Ordered Path descriptions with \n separated vector descriptions for paths if separator == null
+	 */
+	public String description(String separator) {
+		String result = "";
+		for (int i = 0; i < paths.size(); i++) {
+			result = result + "Path[" + i + "]\n";
+			result = result + paths.get(i).description(separator);
+		}
+		
+		return result;
+	}
+	
 	public Shape copy() {
 		Shape shapeCopy = new Shape();
 		shapeCopy.origin = this.origin.copy();

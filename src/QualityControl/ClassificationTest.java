@@ -9,7 +9,7 @@ public class ClassificationTest {
 		ShapeClassifier classifier = new ShapePotentialClassifier();
 		
 		String description = classifier.classify(ShapeTemplates.get("A"));
-		System.out.println("description" + description);
+		System.out.println("description: " + description);
 	}
 
 }

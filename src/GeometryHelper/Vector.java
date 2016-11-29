@@ -9,6 +9,9 @@ public class Vector {
 		this.y = y;
 	}
 	
+	public String description() {
+		return "(" + x + ", " + y + ")";
+	}
 	
 	public Vector copy() {
 		return new Vector(x, y);

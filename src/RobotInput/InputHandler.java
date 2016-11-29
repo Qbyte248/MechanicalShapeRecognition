@@ -124,8 +124,8 @@ public class InputHandler {
 				lastDataPoint=newDataPoint;
 				addPointToPath(lastDataPoint, countPath);
 				//stepForward("x:"+lastDataPoint.x+" // y "+lastDataPoint.y);
-				stepForward("Nx:"+newDataPoint.x+" // y "+newDataPoint.y);
-				stepForward("Ny:"+newDataPoint.y);
+				stepForward(""+newDataPoint.x);
+				stepForward(""+newDataPoint.y);
 				oldleftTachocount=leftTachocount;
 				oldrightTachocount=rightTachocount;
 			}

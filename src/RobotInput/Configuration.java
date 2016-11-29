@@ -7,7 +7,7 @@ public class Configuration {
 	static double angle = Math.PI / 2; // in rad
 	static double newangle; // auch in rad
 	final static double wheeldiameter = 0.056; // m
-	final static double axis = 0.14;// in meter
+	final static double axis = 0.13;// in meter
 	final static double deviationAngle = 0.12; // use to ignore small changes in
 												// angle
 	static Vector center = new Vector(axis / 2, 0); // center.y should stay 0
@@ -42,21 +42,24 @@ public class Configuration {
 		 */
 		// if there was only a small change in angle , should be unnecessary
 		if (Math.abs(newangle) < deviationAngle) {
-			//InputHandler.stepForward("fuck." + newangle);
+			// InputHandler.stepForward("fuck." + newangle);
 			distance = left;
 			return distance;
 		}
 		// compute radius
 
-		h = Math.max(Math.abs(left),Math.abs( right));
+		h = Math.max(Math.abs(left), Math.abs(right));
 		radius = Math.abs(h / newangle);
-		InputHandler.stepForward("h." + h);
+	//	InputHandler.stepForward("h." + h);
 
-		InputHandler.stepForward("ra." + radius);
+		//InputHandler.stepForward("ra." + radius);
 
 		// compute distance with the center pos
 		distance = 2 * (radius - center.x) * Math.sin(newangle);
-		return distance=(Math.abs(distance));
+		if (left < 0 || right < 0) {
+			return distance;
+		}
+		return distance = (Math.abs(distance));
 	}
 
 	static Vector calculatePoint(Vector v, double left, double right) {
@@ -67,7 +70,7 @@ public class Configuration {
 
 		angle += newangle;
 		if (Math.abs(newangle) < deviationAngle) {
-			//InputHandler.stepForward("small." + newangle);
+			// InputHandler.stepForward("small." + newangle);
 			// return null;
 		}
 		calculateSekante(left, right);

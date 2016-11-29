@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class Path {
 
 	public ArrayList<Vector> points = new ArrayList<>();
-	public Vector origin;
+	public Vector origin = new Vector(0, 0);
 	
 	/**
 	 * @param separator

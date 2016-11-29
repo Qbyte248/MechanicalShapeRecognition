@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Shape {
 	public ArrayList<Path> paths = new ArrayList<>();
-	public Vector origin;
+	public Vector origin = new Vector(0, 0);
 	
 	// possible optimization to set all origins to (0, 0) and add a (boolean) flag 
 	

@@ -81,7 +81,7 @@ public class ShapePotentialClassifier implements ShapeClassifier {
 			}
 		}
 		
-		return 0;
+		return potential;
 	}
 	
 	@Override

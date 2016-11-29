@@ -13,6 +13,9 @@ public class Shape {
 	public Shape copy() {
 		Shape shapeCopy = new Shape();
 		shapeCopy.origin = this.origin.copy();
+		if (this.rectangle != null) {
+			shapeCopy.rectangle = this.rectangle.copy();
+		}
 		
 		for (Path path : this.paths) {
 			shapeCopy.paths.add(path.copy());

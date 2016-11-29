@@ -14,6 +14,10 @@ public class Rectangle {
 		this.size = size;
 	}
 	
+	public Rectangle copy() {
+		return new Rectangle(origin.x, origin.y, size.x, size.y);
+	}
+	
 	public Vector center() {
 		return new Vector(origin.x + size.x / 2, origin.y + size.y / 2);
 	}

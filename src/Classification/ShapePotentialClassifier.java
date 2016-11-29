@@ -11,6 +11,8 @@ import GeometryHelper.Vector;
 @SuppressWarnings("deprecation")
 public class ShapePotentialClassifier implements ShapeClassifier {
 	
+	public ShapePotentialClassifier() {}
+	
 	/**
 	 * @param shape1
 	 * @param shape2
@@ -82,44 +84,45 @@ public class ShapePotentialClassifier implements ShapeClassifier {
 		return 0;
 	}
 	
-	private Rectangle getSmallestBoxAround(Shape shape) {
-		
-		Vector lowerLeft = new Vector(Double.MAX_VALUE, Double.MAX_VALUE);
-		Vector upperRight = new Vector(-Double.MAX_VALUE, -Double.MAX_VALUE);
-		
-		boolean hasPoints = false;
-		for (Path path : shape.paths) {
-			hasPoints = hasPoints || !path.points.isEmpty();
-			for (Vector point : path.points) {
-				Vector v = shape.origin.add(path.origin.add(point));
-				
-				// assign lower left and upper right
-				lowerLeft.x = Math.min(lowerLeft.x, v.x);
-				lowerLeft.y = Math.min(lowerLeft.y, v.y);
-				upperRight.x = Math.max(upperRight.x, v.x);
-				upperRight.y = Math.max(upperRight.y, v.y);
-			}
-		}
-		
-		if (!hasPoints) {
-			throw new IllegalArgumentException("Shape has no points => no smallest box");
-		}
-		
-		return new Rectangle(lowerLeft, upperRight.subtract(lowerLeft));
-	}
-	
 	@Override
 	public String classify(Shape shape) {
 		String shapeDescription = null;
 		
+		double lowestClassificationValue = Double.MAX_VALUE;
+		
 		Enumeration<String> shapeDescriptions = ShapeTemplates.getShapeDescriptions();
 		for (; shapeDescriptions.hasMoreElements();) {
-		      shapeDescription = shapeDescriptions.nextElement();
+		      String description = shapeDescriptions.nextElement();
 		      
-		      Shape templateShape = ShapeTemplates.get(shapeDescription);
+		      // copy of template
+		      Shape templateShape = ShapeTemplates.get(description).copy();
 		      
-		      // TODO: get smallest box; translate and scale; compare
+		      // TODO: Rectangle.getRectangle; translate and scale; compare
+		      Rectangle templateRect = ShapeTemplates.get(description).getRectangle();
 		      
+		      Rectangle shapeRect = shape.getRectangleRecalculate();
+		      
+		      // Attention with templateRect.size.q = 0 where q element {x, y}
+		      double widthScale = shapeRect.size.x / templateRect.size.x;
+		      double heightScale = shapeRect.size.y / templateRect.size.y;
+		      
+		      // this is only approximate
+		      double scaleFactor = (widthScale + heightScale) / 2;
+		      
+		      // scale and translate
+		      templateShape.scaleBy(scaleFactor, templateRect.center());
+		      templateShape.translateBy(shapeRect.center().subtract(templateRect.center()));
+		      
+		      // classification value
+		      double classificationValue = ShapePotentialClassifier.classificationValue(shape, templateShape);
+		      
+		      // if classificationValue is lower than the lowest one
+		      // use current shapeDescription as return value
+		      if (classificationValue < lowestClassificationValue) {
+		    	  lowestClassificationValue = classificationValue;
+		    	  
+		    	  shapeDescription = description;
+		      }
 		}
 		
 		return shapeDescription;

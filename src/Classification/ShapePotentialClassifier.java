@@ -90,9 +90,7 @@ public class ShapePotentialClassifier implements ShapeClassifier {
 		
 		double lowestClassificationValue = Double.MAX_VALUE;
 		
-		Enumeration<String> shapeDescriptions = ShapeTemplates.getShapeDescriptions();
-		for (; shapeDescriptions.hasMoreElements();) {
-		      String description = shapeDescriptions.nextElement();
+		for (String description : ShapeTemplates.getShapeDescriptions()) {
 		      
 		      // copy of template
 		      Shape templateShape = ShapeTemplates.get(description).copy();

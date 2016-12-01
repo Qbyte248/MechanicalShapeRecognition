@@ -1,15 +1,17 @@
 package Classification;
 
-import java.util.Enumeration;
-import java.util.Hashtable;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Set;
 
 import GeometryHelper.Path;
 import GeometryHelper.Shape;
 import GeometryHelper.Vector;
 
+@SuppressWarnings("deprecation")
 public class ShapeTemplates {
 	
-	public static Hashtable<String, Shape> shapes = new Hashtable<>();
+	public static HashMap<String, Shape> shapes = new HashMap<>();
 	
 	public static void setup() {
 		// TODO Add Shapes to "shapes"
@@ -158,13 +160,31 @@ public class ShapeTemplates {
 		shape_9.paths.add(path_9);
 		
 		shapes.put("9", shape_9);
+		
+		
+		// add one point in between two connected points
+		for (Shape shape : shapes.values()) {
+			for (Path path : shape.paths) {
+				ArrayList<Vector> newPoints = new ArrayList<>();
+				if (path.points.size() < 2) {
+					continue;
+				}
+				for (int i = 1; i < path.points.size(); i++) {
+					// add first point
+					newPoints.add(path.points.get(i-1));
+					// add midpoint
+					newPoints.add(path.points.get(i-1).add(path.points.get(i)).multiply(0.5));
+				}
+				newPoints.add(path.points.get(path.points.size()-1));
+			}
+		}
 	}
 	
 	public static Shape get(String shapeDescription) {
 		return shapes.get(shapeDescription);
 	}
 	
-	public static Enumeration<String> getShapeDescriptions() {
-		return shapes.keys();
+	public static Set<String> getShapeDescriptions() {
+		return shapes.keySet();
 	}
 }

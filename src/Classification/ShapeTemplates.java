@@ -187,6 +187,8 @@ public class ShapeTemplates {
 					}
 				}
 				newPoints.add(path.points.get(path.points.size()-1));
+				
+				path.points = newPoints;
 			}
 		}
 	}

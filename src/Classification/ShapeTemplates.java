@@ -178,7 +178,7 @@ public class ShapeTemplates {
 					Vector firstPoint = path.points.get(i-1);
 					newPoints.add(firstPoint);
 					
-					Vector dv = path.points.get(i).subtract(firstPoint).multiply(1 / ((double)numberOfAdditionalMidpoints));
+					Vector dv = path.points.get(i).subtract(firstPoint).multiply(1 / ((double)numberOfAdditionalMidpoints + 1));
 					Vector currentMidpoint = firstPoint;
 					for (int j = 0; j < numberOfAdditionalMidpoints; j++) {
 						currentMidpoint = currentMidpoint.add(dv);

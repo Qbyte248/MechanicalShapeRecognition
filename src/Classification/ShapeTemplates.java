@@ -1,9 +1,9 @@
 package Classification;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Set;
 
+import Compatibility.HashMap;
 import GeometryHelper.Path;
 import GeometryHelper.Shape;
 import GeometryHelper.Vector;
@@ -197,7 +197,7 @@ public class ShapeTemplates {
 		return shapes.get(shapeDescription);
 	}
 	
-	public static Set<String> getShapeDescriptions() {
-		return shapes.keySet();
+	public static ArrayList<String> getShapeDescriptions() {
+		return shapes.keys();
 	}
 }

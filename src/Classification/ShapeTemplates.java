@@ -13,7 +13,7 @@ public class ShapeTemplates {
 	
 	public static HashMap<String, Shape> shapes = new HashMap<>();
 	
-	public static void setup() {
+	public static void setup(int numberOfAdditionalMidpoints) {
 		// TODO Add Shapes to "shapes"
 		
 		// A
@@ -162,6 +162,10 @@ public class ShapeTemplates {
 		shapes.put("9", shape_9);
 		
 		
+		if (numberOfAdditionalMidpoints <= 0) {
+			return;
+		}
+		
 		// add one point in between two connected points
 		for (Shape shape : shapes.values()) {
 			for (Path path : shape.paths) {
@@ -171,9 +175,16 @@ public class ShapeTemplates {
 				}
 				for (int i = 1; i < path.points.size(); i++) {
 					// add first point
-					newPoints.add(path.points.get(i-1));
-					// add midpoint
-					newPoints.add(path.points.get(i-1).add(path.points.get(i)).multiply(0.5));
+					Vector firstPoint = path.points.get(i-1);
+					newPoints.add(firstPoint);
+					
+					Vector dv = path.points.get(i).subtract(firstPoint).multiply(1 / ((double)numberOfAdditionalMidpoints));
+					Vector currentMidpoint = firstPoint;
+					for (int j = 0; j < numberOfAdditionalMidpoints; j++) {
+						currentMidpoint = currentMidpoint.add(dv);
+						// add midpoint
+						newPoints.add(currentMidpoint);
+					}
 				}
 				newPoints.add(path.points.get(path.points.size()-1));
 			}

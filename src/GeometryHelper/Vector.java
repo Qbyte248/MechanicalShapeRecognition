@@ -12,7 +12,13 @@ public class Vector {
 	public String description(int startIndex, int endIndex) {
 		String xS = x + "";
 		String yS = y + "";
-		return "(" + xS.substring(startIndex, endIndex) + ", " + yS.substring(startIndex, endIndex) + ")";
+		if (endIndex < xS.length()) {
+			xS = xS.substring(startIndex, endIndex);
+		}
+		if (endIndex < yS.length()) {
+			yS = yS.substring(startIndex, endIndex);
+		}
+		return "(" + xS + ", " + yS + ")";
 	}
 	
 	public Vector copy() {

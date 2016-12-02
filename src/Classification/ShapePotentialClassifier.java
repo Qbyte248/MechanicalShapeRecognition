@@ -72,6 +72,11 @@ public class ShapePotentialClassifier implements ShapeClassifier {
 				Vector v = p2.subtract(p1);
 				double t0 = (point.subtract(p1).scalarProduct(v)) / v.norm();
 				
+				if (!(0 < t0 && t0 < 1)) {
+					// t no element of (0, 1)
+					continue;
+				}
+				
 				// redefine v to g(t0)
 				v.multiplyInPlace(t0);
 				v.addInPlace(p1);

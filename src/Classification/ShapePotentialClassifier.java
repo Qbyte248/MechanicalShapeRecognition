@@ -18,7 +18,7 @@ public class ShapePotentialClassifier implements ShapeClassifier {
 	 * @param shape2
 	 * @return number which is smaller the closer the shapes are
 	 */
-	private static double classificationValue(Shape shape1, Shape shape2) {
+	public static double classificationValue(Shape shape1, Shape shape2) {
 		double potential = 0.0;
 		// potential of shape1 in relation to shape2
 		for (Path path1 : shape1.paths) {
@@ -41,7 +41,7 @@ public class ShapePotentialClassifier implements ShapeClassifier {
 	 * @param shape in the real coordinate system
 	 * @return "potential" to point
 	 */
-	private static double pointPotential(Vector point, Shape shape) {
+	public static double pointPotential(Vector point, Shape shape) {
 		
 		double potential = Double.MAX_VALUE;
 		

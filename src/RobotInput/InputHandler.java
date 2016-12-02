@@ -10,7 +10,7 @@ import lejos.robotics.RegulatedMotor;
 
 public class InputHandler {
 	public static boolean running=true;
-	private static final boolean debugging=true;
+	private static final boolean debugging=false;
 	
 	public static Shape shape=new Shape();
 	static RegulatedMotor leftMotor = Motor.A;

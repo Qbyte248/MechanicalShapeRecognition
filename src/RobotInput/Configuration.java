@@ -7,7 +7,7 @@ public class Configuration {
 	static double angle = Math.PI / 2; // in rad
 	static double newangle; // auch in rad
 	final static double wheeldiameter = 0.056; // m
-	final static double axis = 0.13;// in meter
+	final static double axis = 0.126;// in meter
 	final static double deviationAngle = 0.12; // use to ignore small changes in
 												// angle
 	static Vector center = new Vector(axis / 2, 0); // center.y should stay 0
@@ -66,7 +66,7 @@ public class Configuration {
 		left = convertTachoCountToDistance(left);
 		right = convertTachoCountToDistance(right);
 		computeAngle(left, right);
-		InputHandler.stepForward("angle." + newangle);
+		InputHandler.stepForward("angle." + radToDegree(newangle));
 
 		angle += newangle;
 		if (Math.abs(newangle) < deviationAngle) {
@@ -89,6 +89,9 @@ public class Configuration {
 	static public double convertTachoCountToDistance(double TachoCount) {
 		TachoCount = (TachoCount * 0.5 * wheeldiameter * Math.PI / 180);
 		return TachoCount;
+	}
+	static public double  radToDegree(double a){
+		return a=a*180/Math.PI;
 	}
 
 }

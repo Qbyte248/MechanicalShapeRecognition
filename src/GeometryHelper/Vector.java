@@ -9,8 +9,10 @@ public class Vector {
 		this.y = y;
 	}
 	
-	public String description() {
-		return "(" + x + ", " + y + ")";
+	public String description(int startIndex, int endIndex) {
+		String xS = x + "";
+		String yS = y + "";
+		return "(" + xS.substring(startIndex, endIndex) + ", " + yS.substring(startIndex, endIndex) + ")";
 	}
 	
 	public Vector copy() {

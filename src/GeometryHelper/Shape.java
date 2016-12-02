@@ -14,11 +14,11 @@ public class Shape {
 	 * @param separator for vector descriptions
 	 * @return Ordered Path descriptions with \n separated vector descriptions for paths if separator == null
 	 */
-	public String description(String separator) {
+	public String description(String separator, int startIndex, int endIndex) {
 		String result = "";
 		for (int i = 0; i < paths.size(); i++) {
 			result = result + "Path[" + i + "]\n";
-			result = result + paths.get(i).description(separator);
+			result = result + paths.get(i).description(separator, startIndex, endIndex);
 		}
 		
 		return result;

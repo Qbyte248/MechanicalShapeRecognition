@@ -11,13 +11,13 @@ public class Path {
 	 * @param separator
 	 * @return \n separated vector descriptions if separator == null
 	 */
-	public String description(String separator) {
+	public String description(String separator, int startIndex, int endIndex) {
 		if (separator == null) {
 			separator = "\n";
 		}
 		String result = "";
 		for (Vector point : points) {
-			result = result + point.description() + separator;
+			result = result + point.description(startIndex, endIndex) + separator;
 		}
 		return result;
 	}

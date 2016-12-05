@@ -42,16 +42,11 @@ public class Path {
 	 * @param center from which it is scaled (this/Path coordinate system)
 	 */
 	public void scaleBy(double scaleFactor, Vector center) {
-		Vector newPoint;
 		for(int i = 0; i < points.size(); i++) {
-			newPoint = points.get(i);
-			newPoint.multiplyInPlace(scaleFactor);
+			points.get(i).multiplyInPlace(scaleFactor);
 		}
 		
-		newPoint = origin;
-		newPoint.subtractInPlace(center);
-		newPoint.multiplyInPlace(scaleFactor);
-		newPoint.addInPlace(center);
+		origin.multiplyInPlace(scaleFactor);
 	}
 	
 	/**

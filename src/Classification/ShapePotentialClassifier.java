@@ -100,9 +100,7 @@ public class ShapePotentialClassifier implements ShapeClassifier {
 		      // copy of template
 		      Shape templateShape = ShapeTemplates.get(description).copy();
 		      
-		      // TODO: Rectangle.getRectangle; translate and scale; compare
 		      Rectangle templateRect = ShapeTemplates.get(description).getRectangle();
-		      
 		      Rectangle shapeRect = shape.getRectangleRecalculate();
 		      
 		      // Attention with templateRect.size.q = 0 where q element {x, y}

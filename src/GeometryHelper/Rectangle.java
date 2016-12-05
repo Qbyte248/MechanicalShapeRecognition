@@ -21,4 +21,12 @@ public class Rectangle {
 	public Vector center() {
 		return new Vector(origin.x + size.x / 2, origin.y + size.y / 2);
 	}
+	
+	public void scaleBy(double scaleFactor, Vector center) {
+		size.multiplyInPlace(scaleFactor);
+		
+		origin.subtractInPlace(center);
+		origin.multiplyInPlace(scaleFactor);
+		origin.addInPlace(center);
+	}
 }

@@ -8,24 +8,26 @@ public class Configuration {
 	static double newangle; // auch in rad
 	final static double wheeldiameter = 0.056; // m
 	final static double axis = 0.126;// in meter
-	final static double deviationAngle = 0.12; // use to ignore small changes in
+	final static double deviationAngle = 0.01; // use to ignore small changes in
 												// angle
 	static Vector center = new Vector(axis / 2, 0); // center.y should stay 0
 	static double radius = 0;
 	static double distance = 0;
 	Vector rotationCenter;
 	private static double h = 0.0;
+	private static boolean isLine=false;
 
 	void setCenter(double x, double y) {
 		center.setXY(x, y);
 	}
 
-	// a>b
 	private static double computeAngle(double a, double b) {
 		// radius=(achse *a*0.5+achse *b*0.5)/(a-b);
 
 		// angle=(a-b)/1; // for testing
-		newangle = (b - a) / axis;
+		
+			newangle = (b - a) / axis;
+		
 		return newangle;
 	}
 
@@ -43,7 +45,8 @@ public class Configuration {
 		// if there was only a small change in angle , should be unnecessary
 		if (Math.abs(newangle) < deviationAngle) {
 			// InputHandler.stepForward("fuck." + newangle);
-			distance = left;
+			distance = (left+right)/2.0;
+			isLine=true;
 			return distance;
 		}
 		// compute radius
@@ -56,27 +59,41 @@ public class Configuration {
 
 		// compute distance with the center pos
 		distance = 2 * (radius - center.x) * Math.sin(newangle);
-		if (left < 0 || right < 0) {
+		if (left <= 0 && right <= 0) {
 			return distance;
 		}
+		
 		return distance = (Math.abs(distance));
 	}
 
 	static Vector calculatePoint(Vector v, double left, double right) {
 		left = convertTachoCountToDistance(left);
 		right = convertTachoCountToDistance(right);
+		
 		computeAngle(left, right);
+		
 		InputHandler.stepForward("angle." + radToDegree(newangle));
 
-		angle += newangle;
+		
 		if (Math.abs(newangle) < deviationAngle) {
 			// InputHandler.stepForward("small." + newangle);
 			// return null;
 		}
 		calculateSekante(left, right);
 		InputHandler.stepForward("sekante." + distance);
-		v = v.add(new Vector(distance * Math.cos(angle - newangle / 2), distance * Math.sin(angle - newangle / 2)));
+		if(isLine){
+			isLine=false;
+			v = v.add(new Vector(distance * Math.cos(angle ), distance * Math.sin(angle)));
+			angle += newangle;
+			return v;
 
+		}
+		/*if(left<right&&left<0){
+			v = v.add(new Vector(distance * Math.cos(Math.PI+angle - newangle / 2), distance * Math.sin(Math.PI+angle - newangle / 2)));
+
+		}else{}*/
+		v = v.add(new Vector(distance * Math.cos(angle - newangle / 2), distance * Math.sin(angle - newangle / 2)));
+		angle += newangle;
 		return v;
 	}
 

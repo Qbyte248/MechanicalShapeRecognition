@@ -27,6 +27,9 @@ public class InputHandler {
 	static Vector newDataPoint;
 	static int countPath=-1;
 	
+	boolean leftpressed=false;
+	boolean rightpressed=false;
+	
 	static int step=0; 	//debug
 	public InputHandler(){
 		
@@ -65,7 +68,7 @@ public class InputHandler {
 	public void checkButton(){
 		checkIfFinish();
 		checkIfCancelled();
-		checkIDebug();
+		//checkIDebug();
 		checkLeft();
 		checkRight();
 	}
@@ -76,17 +79,24 @@ public class InputHandler {
 		
 	}
 	private void checkLeft(){
-		if(Button.LEFT.isDown()){
+		if(Button.LEFT.isDown()&&!leftpressed){
+			leftpressed=true;
 			Configuration.angle+=Math.PI/2.0;
 			System.out.println("turned by 90°");
 			System.out.println("angle now "+Configuration.angle);
+		}else if(Button.LEFT.isUp()&&leftpressed){
+			leftpressed=false;
 		}
+		
 	}
 	private void checkRight(){
-		if(Button.RIGHT.isDown()){
+		if(Button.RIGHT.isDown()&&!rightpressed){
+			rightpressed=true;
 			Configuration.angle+= -Math.PI/2.0;
 			System.out.println("turned by -90°");
 			System.out.println("angle now "+Configuration.angle);
+		}else if(Button.RIGHT.isUp()&&rightpressed){
+			rightpressed=false;
 		}
 	}
 	private  void checkIfCancelled(){

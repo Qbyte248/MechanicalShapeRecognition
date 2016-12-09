@@ -66,12 +66,28 @@ public class InputHandler {
 		checkIfFinish();
 		checkIfCancelled();
 		checkIDebug();
+		checkLeft();
+		checkRight();
 	}
 	private  void checkIfFinish(){
 		if(Button.ENTER.isDown()){
 			running=false;
 		}
 		
+	}
+	private void checkLeft(){
+		if(Button.LEFT.isDown()){
+			Configuration.angle+=Math.PI/2.0;
+			System.out.println("turned by 90°");
+			System.out.println("angle now "+Configuration.angle);
+		}
+	}
+	private void checkRight(){
+		if(Button.RIGHT.isDown()){
+			Configuration.angle+= -Math.PI/2.0;
+			System.out.println("turned by -90°");
+			System.out.println("angle now "+Configuration.angle);
+		}
 	}
 	private  void checkIfCancelled(){
 		if(Button.ESCAPE.isDown()){
@@ -87,7 +103,15 @@ public class InputHandler {
 	}
 	private  void write(String s){
 		LCD.clear();
-		LCD.drawString(s, 3, 1);
+		LCD.drawString(s, 1, 1);
+		LCD.refresh();
+		
+	}
+	public static  void write(String[] s ){
+		LCD.clear();
+		for (int i=0;i<s.length;i++){
+			LCD.drawString(s[i], 1, i+1);
+		}
 		LCD.refresh();
 		
 	}
@@ -119,8 +143,9 @@ public class InputHandler {
 		
 		newDataPoint=Configuration.calculatePoint(lastDataPoint, -1.*differenceL, -1.*differenceR);
 		if(newDataPoint!=null){
-			write("size "+shape.paths.get(countPath).points.size());
-			if((newDataPoint.x!=0&&newDataPoint.y!=0)){
+			// TODO :commit in 
+			//write("size "+shape.paths.get(countPath).points.size());
+			if((newDataPoint.x!=lastDataPoint.x||newDataPoint.y!=lastDataPoint.y)){
 				lastDataPoint=newDataPoint;
 				addPointToPath(lastDataPoint, countPath);
 				//stepForward("x:"+lastDataPoint.x+" // y "+lastDataPoint.y);
@@ -133,8 +158,6 @@ public class InputHandler {
 	}
 	
 	void addPointToPath(Vector v,int i ){
-		Path p = shape.paths.get(i);
 		shape.paths.get(i).points.add(v);	
-	
 	}
 }

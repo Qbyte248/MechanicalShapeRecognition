@@ -48,7 +48,7 @@ public class Main {
 			
 			GenerateDataTest.createFile(e.toString());
 		}
-
+		
 		// now compare
 		System.out.println("it's a " + cl.classify(inputhandler.shape));
 		// finished generate data

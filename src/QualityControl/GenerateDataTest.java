@@ -1,10 +1,6 @@
 package QualityControl;
 
-import java.io.BufferedWriter;
-import java.util.ArrayList;
-
 import GeometryHelper.Shape;
-import GeometryHelper.Vector;
 import lejos.nxt.LCD;
 
 import java.io.*;
@@ -54,7 +50,7 @@ public class GenerateDataTest {
 
 		DataOutputStream dataStream = new DataOutputStream(fileStream);
 			try {
-				//dataStream.writeBytes(s.description(null));
+			
 				dataStream.writeBytes(s);
 				fileStream.flush();
 				count++;
@@ -71,35 +67,6 @@ public class GenerateDataTest {
 			System.exit(1);
 		}
 	}
-	public static void readFile(Shape s){
-		
-	    FileOutputStream out = null; // declare outside the try block
-	    File data = new File("log.txt");
-
-	    try {
-	      out = new FileOutputStream(data);
-	    } catch(IOException e) {
-	    	System.err.println("Failed to create output stream");
-	    	System.exit(1);
-	    }
-
-	    DataOutputStream dataOut = new DataOutputStream(out);
-
-	    float x = 1f;
-	    int length = 8;
-
-	    try { // write
-	      for(Vector v:s.paths.get(0).points) {
-	    	System.out.println("hi");  
-	        dataOut.writeDouble(v.x);
-	        dataOut.flush();
-	      }
-	      out.close(); // flush the buffer and write the file
-	    } catch (IOException e) {
-	      System.err.println("Failed to write to output stream");
-	  	System.exit(1);
-	    }
-	  }
 	 
 
 }

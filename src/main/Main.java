@@ -11,7 +11,7 @@ import lejos.nxt.Button;
 import lejos.nxt.LCD;
 
 public class Main {
-
+	//for debug use , if true a text file with the coordinates are created
 	static boolean createTExt = true;
 
 	public static void main(String[] args) {
@@ -45,22 +45,18 @@ public class Main {
 				// GenerateDataTest.readFile(inputhandler.shape);
 			}
 		} catch (Exception e) {
-			
+			// if the text file failed , try to write the error log to the text file
 			GenerateDataTest.createFile(e.toString());
 		}
 		
-		// now compare
+		// now compare and write the output
+		
 		System.out.println("it's a " + cl.classify(inputhandler.shape));
-		// finished generate data
-		// here optimize the data
-		// LCD.clear();
-		// LCD.drawString("end"+inputhandler.shape.paths.get(0).points.size(),
-		// 1, 1);
-		// LCD.drawString("x"+inputhandler.lastDataPoint.x, 1, 2);
-		// LCD.drawString("y"+inputhandler.lastDataPoint.y, 1, 3);
+		
+		// when you are finished press enter to close 
 		Button.ENTER.waitForPressAndRelease();
 
-		// ouput
+	
 
 	}
 

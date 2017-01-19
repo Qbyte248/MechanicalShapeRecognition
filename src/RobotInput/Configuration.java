@@ -55,8 +55,7 @@ public class Configuration {
 	static Vector calculatePoint(Vector v, double left, double right) {
 		left = convertTachoCountToDistance(left);
 		right = convertTachoCountToDistance(right);
-		convertNegativeNullToNull(left, right);
-
+		
 		computeAngle(left, right);
 
 		InputHandler.stepForward("angle." + radToDegree(newangle));
@@ -86,14 +85,7 @@ public class Configuration {
 		return TachoCount = (TachoCount * 0.5 * wheeldiameter * Math.PI / 180);
 	}
 
-	static public void convertNegativeNullToNull(double left, double right) {
-		if (Math.abs(left) == 0.0) {
-			left = 0.0;
-		}
-		if (Math.abs(right) == 0.0) {
-			right = 0.0;
-		}
-	}
+	
 
 	static public double radToDegree(double a) {
 		return a = a * 180 / Math.PI;
